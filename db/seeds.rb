@@ -8,13 +8,15 @@
 
 require 'faker'
 
+CATEGORIES = ["chinese", "italian", "japanese", "french", "belgian"]
+
 puts 'Creating 6 fake restaurants...'
 6.times do
   restaurant = Restaurant.new(
     name:    Faker::Company.name,
     address: "#{Faker::Address.street_address}, #{Faker::Address.city}",
     phone_number: Faker::PhoneNumber.phone_number,
-    category: Faker::Restaurant.type
+    category: CATEGORIES.sample
   )
   restaurant.save!
 end
