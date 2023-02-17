@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -21,8 +22,18 @@ Rails.application.routes.draw do
   #POST "restaurants"
   #post 'restaurants', to: 'restaurants#create'
 
-  resources :restaurants do
-    resources :reviews, only: [:new]
-  end
+  # resources :restaurants do
+  #   resources :reviews, only: [:new, :create]
+  #end
 
+  # Un visiteur peut ajouter un nouvel avis à un restaurant.
+  # GET "restaurants/38/reviews/new"
+  # POST "restaurants/38/reviews"
+  #get 'restaurants/:id/reviews/new', to: 'reviews#new', as: :restaurant_review
+  #post 'restaurants/:id/reviews', to: 'reviews#create', as: :restaurant_reviews
+
+  root to: "restaurants#index"
+  resources :restaurants, only: [:index, :show, :new, :create] do
+    resources :reviews, only: [:create]
+  end
 end
